@@ -55,12 +55,12 @@ O sistema realiza:
 
 ---
 
-//## 📺 Interface Web
+<!--  ## 📺 Interface Web -->
 
-// ![Interface do painel](https://via.placeholder.com/800x400.png?text=Exemplo+Painel+Thymeleaf)  
-// *Acesse em: [`http://localhost:8080/painel`](http://localhost:8080/painel)*
+<!--  ![Interface do painel](https://via.placeholder.com/800x400.png?text=Exemplo+Painel+Thymeleaf)  -->
+<!--  *Acesse em: [`http://localhost:8080/painel`](http://localhost:8080/painel)* -->
 
----
+<!-- --- -->
 
 ## 🛠️ Como Executar
 
