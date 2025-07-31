@@ -9,7 +9,7 @@ public class MedicaoMapper {
         if (medicao == null ) return null;
 
         return new MedicaoDTO(
-                medicao.getTemperatura()
+                medicao.getTemperatura(), medicao.getUmidade()
         );
 
     }
@@ -19,6 +19,7 @@ public class MedicaoMapper {
 
        Medicao medicao = new Medicao();
        medicao.setTemperatura(medicaoDTO.temperatura());
+       medicao.setUmidade(medicaoDTO.umidade());
 
        return medicao;
 

@@ -23,6 +23,7 @@ public class MedicaoService {
     public void registrarTemperaturaAtual(MedicaoDTO medicaoDTO){
         Medicao medicao = new Medicao();
         medicao.setTemperatura(medicaoDTO.temperatura());
+        medicao.setUmidade(medicaoDTO.umidade());
         medicao.setDataHora(LocalDateTime.now());
         ultimaMedicao.set(medicao);
     }
@@ -30,6 +31,7 @@ public class MedicaoService {
     public void salvarHistórico(MedicaoDTO medicaoDTO){
         Medicao medicao = new Medicao();
         medicao.setTemperatura(medicaoDTO.temperatura());
+        medicao.setUmidade(medicaoDTO.umidade());
         medicao.setDataHora(LocalDateTime.now());
         medicaoRepository.save(medicao);
     }
