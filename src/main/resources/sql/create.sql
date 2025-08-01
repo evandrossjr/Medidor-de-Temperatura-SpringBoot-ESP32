@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS medicao (
+    id SERIAL PRIMARY KEY,
+    temperatura DOUBLE PRECISION NOT NULL,
+    umidade DOUBLE PRECISION NOT NULL,
+    data_hora TIMESTAMP NOT NULL
+);
