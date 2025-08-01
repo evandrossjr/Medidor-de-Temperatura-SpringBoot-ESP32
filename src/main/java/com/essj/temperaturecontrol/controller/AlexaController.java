@@ -38,10 +38,6 @@ public class AlexaController {
                 return AlexaResponseDTO.buildSpeech(resposta);
             }
 
-            String resposta = "Lorena, agora está fazendo " + ultima.getTemperatura() + " graus, " +
-                    "com umidade de " + ultima.getUmidade() + " por cento.";
-
-            return AlexaResponseDTO.buildSpeech(resposta);
         }
 
         if ("IntentRequest".equals(tipo)) {
