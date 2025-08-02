@@ -27,7 +27,7 @@ public class MedicaoService {
         Medicao medicao = new Medicao();
         medicao.setTemperatura(medicaoDTO.temperatura());
         medicao.setUmidade(medicaoDTO.umidade());
-        medicao.setDataHora(LocalDateTime.now(Clock.systemDefaultZone()));
+        medicao.setDataHora(OffsetDateTime.now(ZoneId.of("-03:00")));
         ultimaMedicao.set(medicao);
     }
 
