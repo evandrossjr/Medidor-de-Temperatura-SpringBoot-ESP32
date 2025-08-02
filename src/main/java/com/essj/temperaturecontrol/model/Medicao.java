@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "medicao", schema = "esptemperatura")
@@ -16,12 +17,12 @@ public class Medicao {
 
     private double temperatura;
     private double umidade;
-    private LocalDateTime dataHora = LocalDateTime.now();
+    private OffsetDateTime dataHora = OffsetDateTime.now();
 
     public Medicao() {
     }
 
-    public Medicao(Long id, double temperatura, double umidade, LocalDateTime dataHora) {
+    public Medicao(Long id, double temperatura, double umidade, OffsetDateTime dataHora) {
         this.id = id;
         this.temperatura = temperatura;
         this.umidade = umidade;
@@ -52,11 +53,11 @@ public class Medicao {
         this.umidade = umidade;
     }
 
-    public LocalDateTime getDataHora() {
+    public OffsetDateTime getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(LocalDateTime dataHora) {
+    public void setDataHora(OffsetDateTime dataHora) {
         this.dataHora = dataHora;
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -33,7 +35,7 @@ public class MedicaoService {
         Medicao medicao = new Medicao();
         medicao.setTemperatura(medicaoDTO.temperatura());
         medicao.setUmidade(medicaoDTO.umidade());
-        medicao.setDataHora(LocalDateTime.now());
+        medicao.setDataHora(OffsetDateTime.now(ZoneId.of("-03:00")));
         medicaoRepository.save(medicao);
     }
 
