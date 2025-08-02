@@ -27,7 +27,7 @@ public class MedicaoService {
         Medicao medicao = new Medicao();
         medicao.setTemperatura(medicaoDTO.temperatura());
         medicao.setUmidade(medicaoDTO.umidade());
-        medicao.setDataHora(OffsetDateTime.now(ZoneId.of("-03:00")));
+        medicao.setDataHora(OffsetDateTime.now(ZoneId.of("America/Salvador")));
         ultimaMedicao.set(medicao);
     }
 
@@ -35,7 +35,7 @@ public class MedicaoService {
         Medicao medicao = new Medicao();
         medicao.setTemperatura(medicaoDTO.temperatura());
         medicao.setUmidade(medicaoDTO.umidade());
-        medicao.setDataHora(OffsetDateTime.now(ZoneId.of("-03:00")));
+        medicao.setDataHora(OffsetDateTime.now(ZoneId.of("America/Salvador")));
         medicaoRepository.save(medicao);
     }
 
