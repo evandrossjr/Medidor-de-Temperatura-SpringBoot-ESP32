@@ -23,7 +23,7 @@ public class TokenFilter extends OncePerRequestFilter {
 
         String path = request.getServletPath();
 
-        if ("/historico".equals(path) || "/tempatual".equals(path)){
+        if ("/medicao/historico".equals(path) || "/medicao/tempatual".equals(path)){
             String token = request.getHeader("Authorization");
             if (token == null || !token.startsWith("Bearer ")) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
