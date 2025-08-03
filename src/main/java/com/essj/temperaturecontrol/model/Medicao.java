@@ -17,12 +17,12 @@ public class Medicao {
 
     private double temperatura;
     private double umidade;
-    private OffsetDateTime dataHora = OffsetDateTime.now();
+    private LocalDateTime dataHora = LocalDateTime.now();
 
     public Medicao() {
     }
 
-    public Medicao(Long id, double temperatura, double umidade, OffsetDateTime dataHora) {
+    public Medicao(Long id, double temperatura, double umidade, LocalDateTime dataHora) {
         this.id = id;
         this.temperatura = temperatura;
         this.umidade = umidade;
@@ -53,11 +53,11 @@ public class Medicao {
         this.umidade = umidade;
     }
 
-    public OffsetDateTime getDataHora() {
+    public LocalDateTime getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(OffsetDateTime dataHora) {
+    public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
     }
 }
