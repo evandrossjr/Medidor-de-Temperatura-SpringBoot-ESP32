@@ -4,42 +4,170 @@
     <meta charset="UTF-8">
     <title>Painel de Temperatura</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { padding: 8px 12px; border: 1px solid #ccc; text-align: center; }
-        th { background-color: #f2f2f2; }
-        .alta { color: red; font-weight: bold; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 20px;
+            color: #222;
+        }
+
+        h1, h2 {
+            color: #4CAF50;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #f9f9f9;
+        }
+
+        th {
+            background-color: #006400;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .alta {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #008000;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #b30000;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        /* ===== FOOTER LIMPO ===== */
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .autor {
+            font-size: 16px;
+            color: #333;
+            background-color: none;
+        }
+
+        .autor a {
+            color: #4CAF50;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .autor a:hover {
+            color: #E53935;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .social-icons img {
+            width: 28px;
+            height: 28px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons img:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-fixo {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            padding: 10px 0;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .footer-fixo a {
+            color: #4CAF50;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 6px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-fixo a:hover {
+            color: #E53935;
+        }
+
+        .footer-fixo img {
+            vertical-align: middle;
+            margin-left: 6px;
+            transition: transform 0.2s ease;
+        }
+
+        .footer-fixo img:hover {
+            transform: scale(1.1);
+        }
+
+
     </style>
 </head>
 <body>
-<h1>Histórico de Temperatura e Umidade</h1>
 
-<table>
+    <h1>Histórico de Temperatura e Umidade</h1>
+
+    <table>
     <thead>
     <tr>
-        <th>ID</th>
+        <th>Data/Hora</th>
         <th>Temperatura (°C)</th>
         <th>Umidade (%)</th>
-        <th>Data/Hora</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="med : ${medicoes}">
-        <td th:text="${med.id}">1</td>
-        <td th:text="${med.temperatura}" th:classappend="${med.temperatura > 25} ? 'alta' : ''">25.0</td>
-        <td th:text="${med.umidade}" th:classappend="${med.umidade} ">65.0</td>
         <td th:text="${#temporals.format(med.dataHora, 'dd/MM/yyyy HH:mm')}">29/07/2025 18:30</td>
+        <td th:text="${med.temperatura}" th:classappend="${med.temperatura > 25} ? 'alta' : ''">25.0</td>
+        <td th:text="${med.umidade}">65.0</td>
     </tr>
     </tbody>
 </table>
 
-<br/>
-<form method="get" action="/painel">
+    <br/>
+    <form method="get" action="/painel">
     <button type="submit">Atualizar</button>
 </form>
 
-<h2>Média Diária</h2>
-<table>
+    <h2>Média Diária</h2>
+    <table>
     <thead>
     <tr>
         <th>Data</th>
@@ -49,16 +177,15 @@
     </thead>
     <tbody>
     <tr th:each="dia : ${mediasDiarias}">
-        <td th:text="${dia.data}">2025-08-03</td>
+        <td th:text="${#temporals.format(dia.data, 'dd/MM/yyyy')}">03/08/2025</td>
         <td th:text="${#numbers.formatDecimal(dia.mediaTemperatura, 1, 1)}">24.7</td>
         <td th:text="${#numbers.formatDecimal(dia.mediaUmidade, 1, 1)}">63.2</td>
     </tr>
     </tbody>
 </table>
 
-
-<h2>Média Mensal</h2>
-<table>
+    <h2>Média Mensal</h2>
+    <table>
     <thead>
     <tr>
         <th>Mês/Ano</th>
@@ -68,13 +195,22 @@
     </thead>
     <tbody>
     <tr th:each="mes : ${mediasMensais}">
-        <td th:text="${mes.mes + '/' + mes.ano}">08/2025</td>
+        <td th:text="${#strings.format('%02d/%d', mes.mes, mes.ano)}">08/2025</td>
         <td th:text="${#numbers.formatDecimal(mes.mediaTemperatura, 1, 1)}">23.4</td>
         <td th:text="${#numbers.formatDecimal(mes.mediaUmidade, 1, 1)}">65.0</td>
     </tr>
     </tbody>
 </table>
 
+    <footer class="footer-fixo"  style="margin-top: 40px; padding: 10px; text-align: center; font-family: Arial, sans-serif; font-size: 14px; color: #333;">
+    Desenvolvido por
+    <a href="https://www.linkedin.com/in/evandrosacramento/" target="_blank"
+       style="color: #4CAF50; font-weight: bold; text-decoration: none; margin: 0 5px; transition: color 0.3s;"
+       onmouseover="this.style.color='#E53935'"
+       onmouseout="this.style.color='#4CAF50'">
+        Evandro Sacramento
+    </a>
+
+</footer>
 </body>
 </html>
-
