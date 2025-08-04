@@ -11,20 +11,29 @@ import java.util.List;
 
 public interface MedicaoRepository extends JpaRepository<Medicao, Long> {
 
+    // Últimas 10 medições
     List<Medicao> findTop10ByOrderByDataHoraDesc();
 
-    @Query("SELECT new com.essj.temperaturecontrol.dto.MediaDiariaDTO(" +
-            "FUNCTION('DATE', m.dataHora), AVG(m.temperatura), AVG(m.umidade)) " +
-            "FROM Medicao m GROUP BY FUNCTION('DATE', m.dataHora) ORDER BY FUNCTION('DATE', m.dataHora) DESC")
-    List<MediaDiariaDTO> calcularMediaPorDia();
+    // Média por dia (nativa)
+    @Query(value = """
+        SELECT DATE(data_hora) AS data,
+               AVG(temperatura) AS media_temperatura,
+               AVG(umidade) AS media_umidade
+        FROM medicao
+        GROUP BY DATE(data_hora)
+        ORDER BY DATE(data_hora) DESC
+        """, nativeQuery = true)
+    List<Object[]> calcularMediaPorDia();
 
-
-    @Query("SELECT new com.essj.temperaturecontrol.dto.MediaMensalDTO(" +
-            "FUNCTION('YEAR', m.dataHora), FUNCTION('MONTH', m.dataHora), AVG(m.temperatura), AVG(m.umidade)) " +
-            "FROM Medicao m " +
-            "GROUP BY FUNCTION('YEAR', m.dataHora), FUNCTION('MONTH', m.dataHora) " +
-            "ORDER BY FUNCTION('YEAR', m.dataHora) DESC, FUNCTION('MONTH', m.dataHora) DESC")
-    List<MediaMensalDTO> calcularMediaPorMes();
-
-
+    // Média por mês (nativa)
+    @Query(value = """
+        SELECT EXTRACT(YEAR FROM data_hora) AS ano,
+               EXTRACT(MONTH FROM data_hora) AS mes,
+               AVG(temperatura) AS media_temperatura,
+               AVG(umidade) AS media_umidade
+        FROM medicao
+        GROUP BY EXTRACT(YEAR FROM data_hora), EXTRACT(MONTH FROM data_hora)
+        ORDER BY ano DESC, mes DESC
+        """, nativeQuery = true)
+    List<Object[]> calcularMediaPorMes();
 }
