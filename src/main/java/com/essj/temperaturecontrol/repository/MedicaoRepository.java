@@ -13,12 +13,17 @@ public interface MedicaoRepository extends JpaRepository<Medicao, Long> {
 
     List<Medicao> findTop10ByOrderByDataHoraDesc();
 
-    @Query("SELECT new com.essj.temperaturecontrol.dto.MediaDiariaDTO(DATE(m.dataHora), AVG(m.temperatura), AVG(m.umidade)) " +
-            "FROM Medicao m GROUP BY DATE(m.dataHora) ORDER BY DATE(m.dataHora) DESC")
+    @Query("SELECT new com.essj.temperaturecontrol.dto.MediaDiariaDTO(" +
+            "FUNCTION('DATE', m.dataHora), AVG(m.temperatura), AVG(m.umidade)) " +
+            "FROM Medicao m GROUP BY FUNCTION('DATE', m.dataHora) ORDER BY FUNCTION('DATE', m.dataHora) DESC")
     List<MediaDiariaDTO> calcularMediaPorDia();
 
-    @Query("SELECT new com.essj.temperaturecontrol.dto.MediaMensalDTO(YEAR(m.dataHora), MONTH(m.dataHora), AVG(m.temperatura), AVG(m.umidade)) " +
-            "FROM Medicao m GROUP BY YEAR(m.dataHora), MONTH(m.dataHora) ORDER BY YEAR(m.dataHora) DESC, MONTH(m.dataHora) DESC")
+
+    @Query("SELECT new com.essj.temperaturecontrol.dto.MediaMensalDTO(" +
+            "FUNCTION('YEAR', m.dataHora), FUNCTION('MONTH', m.dataHora), AVG(m.temperatura), AVG(m.umidade)) " +
+            "FROM Medicao m " +
+            "GROUP BY FUNCTION('YEAR', m.dataHora), FUNCTION('MONTH', m.dataHora) " +
+            "ORDER BY FUNCTION('YEAR', m.dataHora) DESC, FUNCTION('MONTH', m.dataHora) DESC")
     List<MediaMensalDTO> calcularMediaPorMes();
 
 
