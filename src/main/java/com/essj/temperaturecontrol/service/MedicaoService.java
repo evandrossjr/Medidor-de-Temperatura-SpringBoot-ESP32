@@ -1,6 +1,8 @@
 package com.essj.temperaturecontrol.service;
 
 
+import com.essj.temperaturecontrol.dto.MediaDiariaDTO;
+import com.essj.temperaturecontrol.dto.MediaMensalDTO;
 import com.essj.temperaturecontrol.dto.MedicaoDTO;
 import com.essj.temperaturecontrol.mapper.MedicaoMapper;
 import com.essj.temperaturecontrol.model.Medicao;
@@ -14,6 +16,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Service
 public class MedicaoService {
@@ -46,4 +49,34 @@ public class MedicaoService {
     public List<MedicaoDTO> listarHistorico(){
         return medicaoRepository.findAll().stream().map(MedicaoMapper::toDTO).toList();
     }
+
+
+    public List<Medicao> obterUltimasMedicoes() {
+        return medicaoRepository.findTop10ByOrderByDataHoraDesc();
+    }
+
+    public List<MediaDiariaDTO> obterMediaDiaria() {
+        List<Object[]> resultados = medicaoRepository.calcularMediaPorDia();
+        return resultados.stream()
+                .map(obj -> new MediaDiariaDTO(
+                        ((java.sql.Date) obj[0]).toLocalDate(),
+                        ((Double) obj[1]),
+                        ((Double) obj[2])
+                ))
+                .collect(Collectors.toList());
+    }
+
+
+
+    public List<MediaMensalDTO> obterMediaPorMes() {
+        List<Object[]> resultados = medicaoRepository.calcularMediaPorMes();
+        return resultados.stream().map(obj -> new MediaMensalDTO(
+                ((Number) obj[0]).intValue(),
+                ((Number) obj[1]).intValue(),
+                ((Number) obj[2]).doubleValue(),
+                ((Number) obj[3]).doubleValue()
+        )).collect(Collectors.toList());
+    }
+
+
 }

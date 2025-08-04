@@ -16,24 +16,24 @@ public interface MedicaoRepository extends JpaRepository<Medicao, Long> {
 
     // Média por dia (nativa)
     @Query(value = """
-        SELECT DATE(data_hora) AS data,
-               AVG(temperatura) AS media_temperatura,
-               AVG(umidade) AS media_umidade
-        FROM medicao
-        GROUP BY DATE(data_hora)
-        ORDER BY DATE(data_hora) DESC
-        """, nativeQuery = true)
+    SELECT DATE(m.data_hora) AS data,
+           AVG(m.temperatura) AS media_temperatura,
+           AVG(m.umidade) AS media_umidade
+    FROM medicao m
+    GROUP BY DATE(m.data_hora)
+    ORDER BY DATE(m.data_hora) DESC
+    """, nativeQuery = true)
     List<Object[]> calcularMediaPorDia();
 
     // Média por mês (nativa)
     @Query(value = """
-        SELECT EXTRACT(YEAR FROM data_hora) AS ano,
-               EXTRACT(MONTH FROM data_hora) AS mes,
-               AVG(temperatura) AS media_temperatura,
-               AVG(umidade) AS media_umidade
-        FROM medicao
-        GROUP BY EXTRACT(YEAR FROM data_hora), EXTRACT(MONTH FROM data_hora)
-        ORDER BY ano DESC, mes DESC
-        """, nativeQuery = true)
+    SELECT EXTRACT(YEAR FROM m.data_hora) AS ano,
+           EXTRACT(MONTH FROM m.data_hora) AS mes,
+           AVG(m.temperatura) AS media_temperatura,
+           AVG(m.umidade) AS media_umidade
+    FROM medicao m
+    GROUP BY EXTRACT(YEAR FROM m.data_hora), EXTRACT(MONTH FROM m.data_hora)
+    ORDER BY ano DESC, mes DESC
+    """, nativeQuery = true)
     List<Object[]> calcularMediaPorMes();
 }
