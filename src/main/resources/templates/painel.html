@@ -177,7 +177,7 @@
     </thead>
     <tbody>
     <tr th:each="dia : ${mediasDiarias}">
-        <td th:text="${#temporals.format(dia.data)}">03/08/2025</td>
+        <td th:text="${#temporals.format(dia.data, 'dd/MM/yyyy')}">03/08/2025</td>
         <td th:text="${#numbers.formatDecimal(dia.mediaTemperatura, 1, 1)}">24.7</td>
         <td th:text="${#numbers.formatDecimal(dia.mediaUmidade, 1, 1)}">63.2</td>
     </tr>
@@ -195,7 +195,7 @@
     </thead>
     <tbody>
     <tr th:each="mes : ${mediasMensais}">
-        <td th:text="${#strings.format('%02d/%d', mes.mes, mes.ano)}">08/2025</td>
+        <td th:text="${(mes.mes < 10 ? '0' + mes.mes : mes.mes) + '/' + mes.ano}">08/2025</td>
         <td th:text="${#numbers.formatDecimal(mes.mediaTemperatura, 1, 1)}">23.4</td>
         <td th:text="${#numbers.formatDecimal(mes.mediaUmidade, 1, 1)}">65.0</td>
     </tr>
