@@ -37,6 +37,44 @@
 <form method="get" action="/painel">
     <button type="submit">Atualizar</button>
 </form>
+
+<h2>Média Diária</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Data</th>
+        <th>Temperatura Média (°C)</th>
+        <th>Umidade Média (%)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dia : ${mediasDiarias}">
+        <td th:text="${dia.data}">2025-08-03</td>
+        <td th:text="${#numbers.formatDecimal(dia.mediaTemperatura, 1, 1)}">24.7</td>
+        <td th:text="${#numbers.formatDecimal(dia.mediaUmidade, 1, 1)}">63.2</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2>Média Mensal</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Mês/Ano</th>
+        <th>Temperatura Média (°C)</th>
+        <th>Umidade Média (%)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mes : ${mediasMensais}">
+        <td th:text="${mes.mes + '/' + mes.ano}">08/2025</td>
+        <td th:text="${#numbers.formatDecimal(mes.mediaTemperatura, 1, 1)}">23.4</td>
+        <td th:text="${#numbers.formatDecimal(mes.mediaUmidade, 1, 1)}">65.0</td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
 
