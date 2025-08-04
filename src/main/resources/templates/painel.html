@@ -177,7 +177,7 @@
     </thead>
     <tbody>
     <tr th:each="dia : ${mediasDiarias}">
-        <td th:text="${#temporals.format(dia.data, 'dd/MM/yyyy')}">03/08/2025</td>
+        <td th:text="${#temporals.format(dia.data)}">03/08/2025</td>
         <td th:text="${#numbers.formatDecimal(dia.mediaTemperatura, 1, 1)}">24.7</td>
         <td th:text="${#numbers.formatDecimal(dia.mediaUmidade, 1, 1)}">63.2</td>
     </tr>
