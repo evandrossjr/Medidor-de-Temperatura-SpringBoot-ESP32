@@ -34,7 +34,7 @@ O sistema realiza:
 
 ---
 
-## 🧠 Funcionalidade
+## 🧠 Funcionalidades
 
 | Condição | LED Verde | LED Vermelho | Buzzer |
 |----------|-----------|--------------|--------|
