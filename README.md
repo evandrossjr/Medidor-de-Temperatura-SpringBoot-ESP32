@@ -34,12 +34,12 @@ O sistema realiza:
 
 ---
 
-## 🧠 Funcionalidades
+<!--## 🧠 Funcionalidades-->
 
-| Condição | LED Verde | LED Vermelho | Buzzer |
-|----------|-----------|--------------|--------|
-| Temp. ≤ 25 °C | ✅ Ligado | ❌ Desligado | ❌ Silencioso |
-| Temp. > 25 °C | ❌ Desligado | ✅ Ligado | 🔊 Bipe a cada 30 segundos |
+<!--| Condição | LED Verde | LED Vermelho | Buzzer |-->
+<!--|----------|-----------|--------------|--------|-->
+<!--| Temp. ≤ 25 °C | ✅ Ligado | ❌ Desligado | ❌ Silencioso |-->
+<!--| Temp. > 25 °C | ❌ Desligado | ✅ Ligado | 🔊 Bipe a cada 30 segundos |-->
 
 ---
 
